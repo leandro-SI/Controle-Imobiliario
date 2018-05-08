@@ -33,6 +33,7 @@ public class UsuarioDAOJDBC extends DAOBaseJDBC implements UsuarioDAO{
             if(resultado.next()){
                 usuarioProcurado = new Usuario();
                 usuarioProcurado.setCodigoUsuario(resultado.getInt("idUsuario"));
+                usuarioProcurado.setNome(resultado.getString("nome"));
                 usuarioProcurado.setLogin(resultado.getString("login"));
                 usuarioProcurado.setSenha(resultado.getString("senha"));
                 

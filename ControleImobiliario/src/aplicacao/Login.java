@@ -15,7 +15,9 @@ import persistencia.UsuarioDAOJDBC;
  * @author Leandro
  */
 public class Login extends javax.swing.JFrame {
-
+    
+    static Usuario usuarioSessao;
+    
     /**
      * Creates new form Login
      */
@@ -196,15 +198,17 @@ public class Login extends javax.swing.JFrame {
         UsuarioDAOJDBC userDAO = new UsuarioDAOJDBC();
         Usuario usuario = new Usuario();
         
-        usuario = userDAO.buscarUsuario(jTextUsuario.getText(), jPasswordSenha.getText());
+        usuarioSessao = userDAO.buscarUsuario(jTextUsuario.getText(), jPasswordSenha.getText());
         
-        if(usuario == null){
+        if(usuarioSessao == null){
             
             JOptionPane.showMessageDialog(null, "Usuário não encontrado");
             jTextUsuario.setText("");
             jPasswordSenha.setText("");
         }else{
             JOptionPane.showMessageDialog(null, "Usuário Encontrado");
+            Menu obj = new Menu();
+            obj.setVisible(true);
         }
         
     }//GEN-LAST:event_btnEntrarActionPerformed
