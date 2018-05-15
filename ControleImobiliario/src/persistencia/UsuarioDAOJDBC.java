@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package persistencia;
 
 import java.sql.PreparedStatement;
@@ -42,13 +37,31 @@ public class UsuarioDAOJDBC extends DAOBaseJDBC implements UsuarioDAO{
             }else{
                 
                 return null;
-            }
+            }// fim do else
             
         }catch(SQLException msg){
             JOptionPane.showMessageDialog(null, "Erro no banco de dados" + msg.getMessage());
-        }
+        }// fim catch;
         
         return usuarioProcurado;
-    }
+    }// fim do método buscarUsuario
+    
+    public boolean cadastrarUsuario(Usuario usuario){
+        
+        String consulta = "INSERT INTO usuario(nome, login, senha) VALUES(?, ?, ?)";
+        boolean status = false;
+        try{
+            PreparedStatement stmt = conn.prepareStatement(consulta);
+            stmt.executeUpdate();
+            stmt.close();
+            status = true;
+            
+        }catch(SQLException erro){
+            JOptionPane.showMessageDialog(null, "Erro no cadastro de usuário!");
+        }// fim catch;
+        
+        return status;
+    }// fim metodo cadastrarUsuario;
+    
     
 }

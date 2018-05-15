@@ -25,7 +25,7 @@ public class Cliente {
     private String email;
     private String observacao;
     private String tipo;
-    private String status;
+    private int status;
 
     
     
@@ -129,11 +129,11 @@ public class Cliente {
         this.tipo = tipo;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
     
