@@ -207,6 +207,7 @@ public class Login extends javax.swing.JFrame {
             jPasswordSenha.setText("");
         }else{
             JOptionPane.showMessageDialog(null, "Usuário Encontrado");
+            dispose();
             Menu obj = new Menu();
             obj.setVisible(true);
         }
