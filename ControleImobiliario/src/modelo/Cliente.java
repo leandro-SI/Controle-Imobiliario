@@ -26,7 +26,7 @@ public class Cliente {
     private String observacao;
     private String tipo;
     private int status;
-
+    private int teste;
     
     
     
