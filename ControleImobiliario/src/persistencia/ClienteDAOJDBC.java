@@ -20,27 +20,27 @@ public class ClienteDAOJDBC extends DAOBaseJDBC implements ClienteDAO{
     
     public boolean CadastrarCliente(Cliente cliente){
         
-        String consulta = "INSERT INTO cliente(nome, cpf, rg, dataNascimento, sexo, estadoCivil, "
-                + "telefone, celular, email, tipo, status, observacao) VALUES(?, ?, ?, ?, ?, ?, ?, "
-                + "?, ?, ?, ? ,?)";
+        String consulta = "INSERT INTO cliente(nome, cpf, rg, sexo, estadoCivil, "
+                + "telefone, celular, email, tipo, status, observacao) VALUES(?, ?, ?, ?, ?, ?, "
+                + "?, ?, ?, ? ,?)"; // Incluir interrogação da coluna dataNascimento;
         boolean status = false;
         
         try{
             
             PreparedStatement stmt = conn.prepareStatement(consulta);
-            stmt.setString(1, cliente.getNome());
-            stmt.setString(2, cliente.getCpf());
-            stmt.setString(3, cliente.getRg());
-            //stmt.setDate(4, '2018/06/02');
-            stmt.setString(5, cliente.getSexo());
-            stmt.setString(6, cliente.getEstadoCivil());
-            stmt.setString(7, cliente.getTelefone());
-            stmt.setString(8, cliente.getCelular());
-            stmt.setString(9, cliente.getEmail());  
-            stmt.setString(10, "físico");
-            stmt.setString(11, "ativo");
-            stmt.setString(12, cliente.getObservacao());
-            stmt.executeQuery();
+            stmt.setString(1, cliente.getNome()); // coluna Nome;
+            stmt.setString(2, cliente.getCpf()); // colune Cpf;
+            stmt.setString(3, cliente.getRg()); // coluna Rg;
+            //stmt.setDate(4, '2018/06/02'); // coluna dataNascimento;
+            stmt.setString(4, cliente.getSexo());
+            stmt.setString(5, cliente.getEstadoCivil());
+            stmt.setString(6, cliente.getTelefone());
+            stmt.setString(7, cliente.getCelular());
+            stmt.setString(8, cliente.getEmail());  
+            stmt.setString(9, "físico");
+            stmt.setString(10, "ativo");
+            stmt.setString(11, cliente.getObservacao());
+            stmt.executeUpdate();
             //stmt.close();
             status = true;
 
