@@ -66,11 +66,11 @@ public class CadastroCliente extends javax.swing.JFrame {
         jButtonSalvar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Cliente");
         setResizable(false);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Dados do Cliente", 0, 0, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Dados do Cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
         jPanel2.setToolTipText("teste");
         jPanel2.setName("teste"); // NOI18N
 
@@ -207,7 +207,6 @@ public class CadastroCliente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         jTextCelular.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextCelular.setPreferredSize(new java.awt.Dimension(65, 23));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -226,10 +225,9 @@ public class CadastroCliente extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addComponent(jTextNome, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
                         .addComponent(jTextRazaoSocial)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jTextCelular, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                            .addComponent(jTextTelefone, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextEstadoCivil, javax.swing.GroupLayout.Alignment.LEADING))))
+                        .addComponent(jTextCelular, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+                        .addComponent(jTextTelefone)
+                        .addComponent(jTextEstadoCivil)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
