@@ -5,6 +5,9 @@
  */
 package aplicacao;
 
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import modelo.Cliente;
 import persistencia.ClienteDAOJDBC;
@@ -94,6 +97,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Razão Social");
 
+        jTextRazaoSocial.setEditable(false);
         jTextRazaoSocial.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -130,14 +134,25 @@ public class CadastroCliente extends javax.swing.JFrame {
 
         jTextAreaObservacao.setColumns(20);
         jTextAreaObservacao.setRows(5);
+        jTextAreaObservacao.setAutoscrolls(false);
         jScrollPane1.setViewportView(jTextAreaObservacao);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jRadioPessoaFisica.setSelected(true);
         jRadioPessoaFisica.setText("Física");
+        jRadioPessoaFisica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioPessoaFisicaActionPerformed(evt);
+            }
+        });
 
         jRadioPessoaJuridica.setText("Jurídica");
+        jRadioPessoaJuridica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioPessoaJuridicaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -162,9 +177,20 @@ public class CadastroCliente extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        jRadioSexoMasculino.setSelected(true);
         jRadioSexoMasculino.setText("Masculino");
+        jRadioSexoMasculino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioSexoMasculinoActionPerformed(evt);
+            }
+        });
 
         jRadioSexoFeminino.setText("Feminino");
+        jRadioSexoFeminino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioSexoFemininoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -193,6 +219,11 @@ public class CadastroCliente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         jTextNascimento.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextNascimento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextNascimentoActionPerformed(evt);
+            }
+        });
 
         try {
             jTextTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) ####-####")));
@@ -230,7 +261,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                         .addComponent(jTextEstadoCivil)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,6 +352,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         jButtonLimpar.setMinimumSize(new java.awt.Dimension(100, 23));
         jButtonLimpar.setPreferredSize(new java.awt.Dimension(100, 30));
 
+        jButtonSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
         jButtonSalvar.setText("Salvar");
         jButtonSalvar.setMinimumSize(new java.awt.Dimension(100, 23));
         jButtonSalvar.setPreferredSize(new java.awt.Dimension(100, 30));
@@ -330,9 +362,15 @@ public class CadastroCliente extends javax.swing.JFrame {
             }
         });
 
+        jButtonCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancel.png"))); // NOI18N
         jButtonCancelar.setText("Cancelar");
         jButtonCancelar.setMinimumSize(new java.awt.Dimension(100, 23));
         jButtonCancelar.setPreferredSize(new java.awt.Dimension(100, 30));
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -345,22 +383,24 @@ public class CadastroCliente extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(64, 64, 64)
                 .addComponent(jButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 280, Short.MAX_VALUE)
-                .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 11, Short.MAX_VALUE)
+                        .addComponent(jButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(20, 20, 20))
         );
 
@@ -393,13 +433,33 @@ public class CadastroCliente extends javax.swing.JFrame {
         cliente.setNome(jTextNome.getText());
         cliente.setCpf(jTextCpf.getText());
         cliente.setRg(jTextRg.getText());
-        //cliente.setDataNascimento("2018-06-02");
-        cliente.setSexo("Masculino");
+        
+        String dia = jTextNascimento.getText().substring(0,2);
+        String mes = jTextNascimento.getText().substring(3,5);
+        String ano = jTextNascimento.getText().substring(6);
+        String paraSql = ano+"-"+mes+"-"+dia;
+        
+        System.out.println(paraSql);
+        //cliente.setDataNascimento(paraSql);
+        
+          //cliente.setDataNascimento("2018-06-02");
+        
+        if(jRadioSexoMasculino.isSelected()){
+            cliente.setSexo("masculino");
+        }else{
+            cliente.setSexo("feminino");
+        } 
+  
         cliente.setEstadoCivil(jTextEstadoCivil.getText());
         cliente.setTelefone(jTextTelefone.getText());
         cliente.setCelular(jTextCelular.getText());
         cliente.setEmail(jTextEmail.getText());
-        //cliente.setTipo();
+        
+        if(jRadioPessoaFisica.isSelected()){
+            cliente.setTipo("fisica");
+        }else{
+            cliente.setTipo("juridica");
+        }
         cliente.setStatus(1);
         cliente.setObservacao(jTextAreaObservacao.getText());
         
@@ -411,6 +471,49 @@ public class CadastroCliente extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jButtonSalvarActionPerformed
+
+    private void jRadioPessoaFisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioPessoaFisicaActionPerformed
+        // TODO add your handling code here:
+        
+        if(jRadioPessoaFisica.isSelected()){
+            jRadioPessoaJuridica.setSelected(false);
+        }
+   
+    }//GEN-LAST:event_jRadioPessoaFisicaActionPerformed
+
+    private void jRadioPessoaJuridicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioPessoaJuridicaActionPerformed
+        // TODO add your handling code here:
+        
+        if(jRadioPessoaJuridica.isSelected()){
+            jRadioPessoaFisica.setSelected(false);
+        }
+    }//GEN-LAST:event_jRadioPessoaJuridicaActionPerformed
+
+    private void jRadioSexoMasculinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioSexoMasculinoActionPerformed
+        // TODO add your handling code here:
+        
+        if(jRadioSexoMasculino.isSelected()){
+            jRadioSexoFeminino.setSelected(false);
+        }
+    }//GEN-LAST:event_jRadioSexoMasculinoActionPerformed
+
+    private void jRadioSexoFemininoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioSexoFemininoActionPerformed
+        // TODO add your handling code here:
+        
+        if(jRadioSexoFeminino.isSelected()){
+            jRadioSexoMasculino.setSelected(false);
+        }
+    }//GEN-LAST:event_jRadioSexoFemininoActionPerformed
+
+    private void jTextNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextNascimentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextNascimentoActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        // TODO add your handling code here:
+        
+        this.dispose();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     /**
      * @param args the command line arguments

@@ -6,12 +6,15 @@
 package modelo;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 /**
  *
  * @author Leandro
  */
 public class Cliente {
+    
     
     private int codCliente;
     private String nome;
@@ -65,14 +68,7 @@ public class Cliente {
         this.rg = rg;
     }
 
-    public Date getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(Date dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
-
+    
     public String getSexo() {
         return sexo;
     }
@@ -136,7 +132,22 @@ public class Cliente {
     public void setStatus(int status) {
         this.status = status;
     }
+
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+   
+   
+
+   
+
     
+       
     
     
     

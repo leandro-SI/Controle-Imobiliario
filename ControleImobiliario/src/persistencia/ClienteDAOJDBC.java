@@ -5,8 +5,14 @@
  */
 package persistencia;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.DateFormatSymbols;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modelo.Cliente;
 import tools.DAOBaseJDBC;
@@ -31,22 +37,40 @@ public class ClienteDAOJDBC extends DAOBaseJDBC implements ClienteDAO{
             stmt.setString(1, cliente.getNome()); // coluna Nome;
             stmt.setString(2, cliente.getCpf()); // colune Cpf;
             stmt.setString(3, cliente.getRg()); // coluna Rg;
-            //stmt.setDate(4, '2018/06/02'); // coluna dataNascimento;
+            SimpleDateFormat atual = new SimpleDateFormat("yyyy/MM/dd");
+            //stmt.setDate(4, atual.parse(cliente.getDataNascimento())); // coluna dataNascimento;
             stmt.setString(4, cliente.getSexo());
-            stmt.setString(5, cliente.getEstadoCivil());
+            
+            if(!cliente.getEstadoCivil().isEmpty()){
+                stmt.setString(5, cliente.getEstadoCivil());
+            }else{
+                stmt.setString(5, null);
+            }
+            
             stmt.setString(6, cliente.getTelefone());
             stmt.setString(7, cliente.getCelular());
-            stmt.setString(8, cliente.getEmail());  
-            stmt.setString(9, "físico");
+            
+            if(!cliente.getEmail().isEmpty()){
+                stmt.setString(8, cliente.getEmail());
+            }else{
+                stmt.setString(8, null);
+            }
+            
+            stmt.setString(9, cliente.getTipo());
             stmt.setString(10, "ativo");
-            stmt.setString(11, cliente.getObservacao());
+            
+            if(!cliente.getObservacao().isEmpty()){
+                stmt.setString(11, cliente.getObservacao());
+            }else{
+                stmt.setString(11, null);
+            }
+                 
             stmt.executeUpdate();
-            //stmt.close();
             status = true;
 
         }catch(SQLException e){
             JOptionPane.showMessageDialog(null, "Erro no banco cad/cliente");
-        }// Fim do catch;
+        }
         
         
         return status;
