@@ -12,12 +12,12 @@ import persistencia.TipoImovelDAOJDBC;
  *
  * @author Leandro
  */
-public class TipoImovel extends javax.swing.JFrame {
+public class CadastroTipoImovel extends javax.swing.JFrame {
 
     /**
      * Creates new form TipoImovel
      */
-    public TipoImovel() {
+    public CadastroTipoImovel() {
         initComponents();
     }
 
@@ -111,7 +111,7 @@ public class TipoImovel extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         TipoImovelDAOJDBC tipoDAO = new TipoImovelDAOJDBC();
-        TipoImovel tipo = new TipoImovel();
+        CadastroTipoImovel tipo = new CadastroTipoImovel();
         
         tipo.setName(txtTipo.getText());
         
@@ -141,20 +141,21 @@ public class TipoImovel extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TipoImovel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroTipoImovel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TipoImovel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroTipoImovel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TipoImovel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroTipoImovel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TipoImovel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroTipoImovel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TipoImovel().setVisible(true);
+                new CadastroTipoImovel().setVisible(true);
             }
         });
     }

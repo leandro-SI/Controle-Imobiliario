@@ -40,7 +40,7 @@ public class UsuarioDAOJDBC extends DAOBaseJDBC implements UsuarioDAO{
             }// fim do else
             
         }catch(SQLException msg){
-            JOptionPane.showMessageDialog(null, "Erro no banco de dados" + msg.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro no banco de dados - Método BuscarUsuario: " + msg.getMessage());
         }// fim catch;
         
         return usuarioProcurado;

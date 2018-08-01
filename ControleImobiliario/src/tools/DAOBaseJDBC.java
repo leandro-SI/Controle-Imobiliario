@@ -27,10 +27,10 @@ public class DAOBaseJDBC {
             Class.forName(Config.NOME_DRIVER);
             conn = DriverManager.getConnection(Config.BD_URL, Config.BD_LOGIN, Config.BD_SENHA);
         }catch(ClassNotFoundException e){
-            JOptionPane.showMessageDialog(null, "Classe não encontrada: Erro - " + e);
+            JOptionPane.showMessageDialog(null, "Classe não encontrada - DAOBase: Erro - " + e);
             System.exit(1);
         }catch(SQLException e){
-            JOptionPane.showMessageDialog(null, "Falha no acesso ao banco de dados: Erro - " + e);
+            JOptionPane.showMessageDialog(null, "Falha no acesso ao banco de dados - DAOBase: Erro - " + e);
         }
     }
     

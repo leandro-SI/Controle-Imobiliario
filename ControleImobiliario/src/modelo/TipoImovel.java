@@ -35,6 +35,11 @@ public class TipoImovel {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+
+    @Override
+    public String toString() {
+        return getTipo(); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
     

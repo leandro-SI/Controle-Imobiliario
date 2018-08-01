@@ -5,7 +5,9 @@
  */
 package persistencia;
 
-import aplicacao.TipoImovel;
+import aplicacao.CadastroTipoImovel;
+import modelo.TipoImovel;
+import java.util.List;
 
 /**
  *
@@ -13,5 +15,6 @@ import aplicacao.TipoImovel;
  */
 public interface TipoImovelDAO {
     
-    public boolean CadastrarTipoImovel(TipoImovel tipo);
+    public boolean CadastrarTipoImovel(CadastroTipoImovel tipo);
+    public List<TipoImovel> ListaTipoImovel();
 }
