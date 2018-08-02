@@ -8,11 +8,13 @@ public class Imovel {
     
     private int codImovel;
     private Endereco endereco;
-    private int situacao;
+    private String situacao;
     private TipoImovel tipo;
     private String identificacao;
     private double valorAluguel;
     private String observacao;
+    private String iptu;
+    private String proprietario;
 
     
     
@@ -37,11 +39,11 @@ public class Imovel {
         this.endereco = endereco;
     }
 
-    public int getSituacao() {
+    public String getSituacao() {
         return situacao;
     }
 
-    public void setSituacao(int situacao) {
+    public void setSituacao(String situacao) {
         this.situacao = situacao;
     }
 
@@ -75,6 +77,22 @@ public class Imovel {
 
     public void setObservacao(String observacao) {
         this.observacao = observacao;
+    }
+
+    public String getIptu() {
+        return iptu;
+    }
+
+    public void setIptu(String iptu) {
+        this.iptu = iptu;
+    }
+
+    public String getProprietario() {
+        return proprietario;
+    }
+
+    public void setProprietario(String proprietario) {
+        this.proprietario = proprietario;
     }
        
     

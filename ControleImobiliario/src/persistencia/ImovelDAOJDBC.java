@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import modelo.Agua;
 import modelo.Endereco;
+import modelo.Imovel;
 import tools.DAOBaseJDBC;
 
 /**
@@ -20,13 +21,35 @@ import tools.DAOBaseJDBC;
  */
 public class ImovelDAOJDBC extends DAOBaseJDBC implements ImovelDAO {
     
-    public boolean CadastrarImovel(CadastroImovel imovel){
+    public boolean CadastrarImovel(Imovel imovel, Endereco endereco){
         
         boolean status = false;
         
-        String consultaSQL = "INSERT INTO imovel(situacao, identificacao, valorAluguel, observacao, "
-                + "iptu, proprietario, dataCadastro, Endereco_idEndereco, TipoImovel_idTipoImovel, "
-                + "CadLuz_idCadLuz, CadAgua_idCadAgua) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+        String consultaSQLImovel = "INSERT INTO imovel(situacao, identificacao, valorAluguel, observacao, "
+                + "iptu, proprietario, Endereco_idEndereco, TipoImovel_idTipoImovel) "
+                + " VALUES(?, ?, ?, ?, ?, ?, ?, ?) ";
+        
+        this.CadastrarEndereco(endereco);
+        int ultimoEndereco = this.IdUltimoEndereco();
+        
+        try{
+            
+            PreparedStatement stmt = conn.prepareStatement(consultaSQLImovel);
+            stmt.setString(1, imovel.getSituacao());
+            stmt.setString(2, imovel.getIdentificacao());
+            stmt.setDouble(3, imovel.getValorAluguel());
+            stmt.setString(4, imovel.getObservacao());
+            stmt.setString(5, imovel.getIptu());
+            stmt.setString(6, imovel.getProprietario());
+            stmt.setInt(7, ultimoEndereco);
+            stmt.setInt(8, imovel.getTipo().getCodTipoImovel());
+            stmt.executeUpdate();
+            status = true;
+            
+                
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Erro no cadastro de imovel: " + e.getMessage());
+        }
         
         return status;
     }
@@ -36,7 +59,7 @@ public class ImovelDAOJDBC extends DAOBaseJDBC implements ImovelDAO {
     public void CadastrarEndereco(Endereco endereco){
         
         String consultaSQL = "INSERT INTO endereco(logradouro, numero, bairro, cidade, estado, cep) "
-                + "VALUES (?, ?, ?, ?, ?, ?)";
+                + "VALUES(?, ?, ?, ?, ?, ?)";
         
         try{
             
@@ -63,7 +86,7 @@ public class ImovelDAOJDBC extends DAOBaseJDBC implements ImovelDAO {
     public int IdUltimoEndereco(){
         
         int id = -1;
-        String consultaSQL = "SELECT * FROM endereco ORDER BY  DESC limit 1";
+        String consultaSQL = "SELECT * FROM endereco ORDER BY idEndereco DESC limit 1";
         
         try{
             PreparedStatement stmt = conn.prepareStatement(consultaSQL);

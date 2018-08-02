@@ -7,7 +7,10 @@ package aplicacao;
 
 import java.util.List;
 import javax.swing.JOptionPane;
+import modelo.Endereco;
+import modelo.Imovel;
 import modelo.TipoImovel;
+import persistencia.ImovelDAOJDBC;
 import persistencia.TipoImovelDAOJDBC;
 
 /**
@@ -182,7 +185,7 @@ public class CadastroImovel extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Eras Demi ITC", 2, 16)); // NOI18N
         jLabel16.setText("Valor do Aluguel R$:");
 
-        txtValorAluguek.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
+        txtValorAluguek.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
         txtValorAluguek.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -383,6 +386,39 @@ public class CadastroImovel extends javax.swing.JFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
+        
+        Imovel imovel = new Imovel();
+        Endereco endereco = new Endereco();
+        TipoImovel tipo = new TipoImovel();
+        ImovelDAOJDBC imovelDAO = new ImovelDAOJDBC();
+        
+        endereco.setLogradouro(txtLogradouro.getText());
+        endereco.setNumero(txtNumero.getText());
+        endereco.setBairro(txtBairro.getText());
+        endereco.setCidade(txtCidade.getText());
+        endereco.setEstado(txtEstado.getText());
+        endereco.setCep(txtCep.getText());
+        
+        tipo = (TipoImovel) comboBoxTipo.getSelectedItem();
+        
+        imovel.setTipo(tipo);
+        imovel.setEndereco(endereco);
+        imovel.setSituacao((String) comboBoxSituacao.getSelectedItem());
+        imovel.setIdentificacao(txtDescricao.getText());
+        imovel.setValorAluguel( Double.parseDouble(txtValorAluguek.getText()) );
+        imovel.setObservacao(txtObs.getText());
+        imovel.setIptu(txtNumeroIptu.getText());
+        imovel.setProprietario(txtProprietario.getText());
+        
+        if(imovelDAO.CadastrarImovel(imovel, endereco)){
+            JOptionPane.showMessageDialog(null, "Imóvel Cadastrado com sucesso!");
+            this.dispose();
+        }else{
+            JOptionPane.showMessageDialog(null, "Erro no Cadastro...");
+        }
+        
+        
+        
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

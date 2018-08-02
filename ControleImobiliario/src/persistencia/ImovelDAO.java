@@ -8,6 +8,7 @@ package persistencia;
 import aplicacao.CadastroImovel;
 import modelo.Agua;
 import modelo.Endereco;
+import modelo.Imovel;
 import modelo.Luz;
 
 /**
@@ -16,7 +17,7 @@ import modelo.Luz;
  */
 public interface ImovelDAO {
     
-    public boolean CadastrarImovel(CadastroImovel imovel);
+    public boolean CadastrarImovel(Imovel imovel, Endereco endereco);
     public void CadastrarEndereco(Endereco endereco);
     //public void CadastrarAgua(Agua agua);
     //public void CadastrarLuz(Luz luz);
